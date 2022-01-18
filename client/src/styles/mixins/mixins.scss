@@ -1,0 +1,67 @@
+@mixin text ($fontSize, $letterSpacing:0.5, $fontWeight:400) {
+    font-size: $fontSize + unquote("px");
+    letter-spacing: $letterSpacing + unquote("px");
+    font-weight: $fontWeight;
+}
+
+@mixin h1 () {
+    font-size: 20px;
+    line-height: 30px;
+    letter-spacing: 3.5px;
+    font-weight:600;
+    text-transform: uppercase;
+}
+
+@mixin h2 () {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 400;
+    letter-spacing: 2px;
+}
+
+@mixin h3 () {
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 1.4px;
+}
+
+@mixin h4 () {
+    font-size: 16px;
+    line-height: 26px;
+}
+
+@mixin p () {
+    font-size: 14px;
+    line-height: 26px;
+}
+
+@mixin p-light () {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 100;
+}
+
+@mixin p-bold () {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 600;
+}
+
+@mixin custom-scrollbar () {
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: rgba(0,0,0,0);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: rgba(255,255,255,0.35);
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: rgba(210,190,235,0.7);
+    }
+}
