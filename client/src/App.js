@@ -21,6 +21,8 @@ export default function App() {
 
   useEffect(() => {
 
+    console.log('Hello!');
+
     console.log('Start for',pair,'!');
 
     const apiCall = async () => {
