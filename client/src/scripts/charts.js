@@ -368,6 +368,7 @@ export const addIndicatorSMA = (chart,data) => {
         '50 Day SMA' : SMA50LineSeries,
         '140 Day SMA' : SMA140LineSeries,
         '200 Day SMA' : SMA200LineSeries,
+        '350 Day SMA' : SMA350LineSeries,
         '147 Day EMA' : EMA147LineSeries,
         'Volume' : volumeSeries
     };
