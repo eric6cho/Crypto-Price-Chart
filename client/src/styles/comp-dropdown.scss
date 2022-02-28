@@ -1,0 +1,76 @@
+@import "mixins/mixins.scss";
+
+.component.dropdown{
+    @include background();
+    display: block;
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    
+    .header-section{
+        @include transition();
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 50px;
+        overflow: hidden;
+        padding: 15px;
+        border-radius: 6px 6px 0 0;
+        cursor: pointer;
+
+        .icon{ 
+            margin-left: auto;
+        }
+        
+        &:hover{
+            @include background(0.2);
+        } 
+    }
+
+    .body-section{
+        overflow: hidden;
+
+        .asset-section{
+            padding: 20px;
+
+           :last-child{
+                margin-left: auto;
+            }
+                
+            .asset-icon{
+                @include icon(30);
+                background: none;
+                border-radius: 50%;
+                overflow: hidden;
+                margin-right: 10px;
+            }
+        
+            h2{
+                display: flex;
+                align-items: center;
+            }
+        }
+          
+        .list-section{
+            display: none; 
+            overflow-y: scroll;
+            padding: 0 2px 0 10px;
+            height: 500px;
+        }
+    }
+
+    &.active{
+         
+        .header-section{
+            @include background(0.2);
+        }
+       
+        .list-section{
+            display: block;
+        }
+    }
+
+    @import './comp-dropdown-asset.scss';
+    @import './comp-dropdown-indicator.scss';
+    @import './comp-dropdown-market.scss';
+}

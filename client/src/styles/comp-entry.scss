@@ -1,0 +1,68 @@
+@import "mixins/mixins.scss";
+
+.component.entry{
+    @include transition();
+    position: relative;
+    border-radius: 6px;
+    margin: 10px 0;
+
+    &:hover{
+        @include background(0.2);
+    }
+
+    .entry-header-section{
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
+
+    .entry-text-section{
+        display: none;
+        padding: 5px 15px 15px;
+        
+        p{
+            margin-bottom: 15px;
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+        
+    .entry-icon-section{
+        position: absolute;
+        right: 15px;
+        top: 9px;
+
+        .icon{
+            @include white(0.5);
+            @include transition();
+            margin-left: 10px;
+            cursor: pointer;
+
+            &:hover{
+                @include white();
+
+                &.green{
+                    @include green();
+                }
+            }
+
+            &.green{
+                @include green(0.5);
+            }
+        }      
+    }
+
+    &.active{
+        @include background(0.2);
+
+        .entry-text-section{
+            display: block;
+        }      
+    }
+
+    @import './comp-entry-asset.scss';
+    @import './comp-entry-indicator.scss';
+}

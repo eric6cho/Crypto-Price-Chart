@@ -1,50 +1,77 @@
-import React from "react";
-import AssetSelector from "./comp-asset-selector";
+import React, { useState, useEffect } from "react";
+import DropdownAsset from "./comp-dropdown-asset";
+import DropdownMarket from "./comp-dropdown-market";
+import Dropdownindicator from "./comp-dropdown-indicator";
 import './../styles/comp-navigation.scss';
 
 export default function Navigation(props) {
 
-  const [appTitle, setAppTitle] = React.useState(null);
-  const [indicatorTitles, setIndicatorTitles] = React.useState(null);
+  const componentId = 'navigation';
+  const defaultClass = 'component '+componentId+' ';
+  const activeClass = 'active ';
 
-  React.useEffect(() => {
+  const [isActive, setIsActive] = useState(false);
+  const [componentClass, setComponentClass] = useState(defaultClass);
 
-    setAppTitle(props.appTitle);
-    setIndicatorTitles(props.indicatorTitles);
+  useEffect(() => {
 
-  },[props.appTitle,props.indicatorTitles]);
+    return () => {};
 
-  const getAssetSelector = () => {
-    return props.assetSelector;
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[]);
+  
 
-  const getTextSection = () => {
-    
-    let titleSections = indicatorTitles.map(title => (
-      <a className="title-section" href={'#'+title}>
-        <div className="indicator-bar"></div>
-        <h4>{title}</h4>
-      </a>
-    ));
 
-    return (
-      <div className="text-section"> 
-        <h1>{appTitle}</h1>
-        {titleSections}
-      </div>
-    );
+  const toggleExpand = (state=null) => setExpand(state!==null?state:!isActive);
+
+  const setExpand = (state) => {
+    setComponentClass(defaultClass+(state?activeClass:''));
+    setIsActive(state);
   };
 
   const getComponent = () => {
-    if(!indicatorTitles || !appTitle) 
-      return (<div className="text-section"></div>);
+
+    let assetSection = 
+      <DropdownAsset
+        data={props.currencyData}
+        currency={props.activeCurrency}
+        price={props.currentPrice} 
+        handleSelect={props.handleAssetSelect} 
+      />;
+
+    let indicatorSection = 
+      <Dropdownindicator
+        data={props.indicatorData}
+        activeIndicators={props.activeIndicators}
+        handleSelect={props.handleIndicatorSelect}
+      />;
+
+    let marketSection = 
+      <DropdownMarket 
+        data={props.globalData}
+      />;
+
+
+    let bodySection = 
+    <div className="nav-body-section">
+      {assetSection}
+      {indicatorSection}
+      {marketSection}
+    </div>;
+
+    let headerSection = 
+      <div className="nav-header-section" onClick={(() => toggleExpand())}>
+        <h1>Menu</h1>  
+        <span className="material-icons icon">{isActive?'expand_more':'expand_less'}</span>
+      </div>;
 
     return (
-    <div className="navigation">
-      {getTextSection()}
-      {getAssetSelector()}
-    </div>);
-  };
+      <div className={componentClass}>
+        {bodySection}
+        {headerSection}
+      </div>
+    );
+  }
 
   return getComponent();
 }

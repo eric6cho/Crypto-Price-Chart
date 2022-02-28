@@ -1,0 +1,43 @@
+@import "mixins/mixins.scss";
+
+&.dropdown-market{
+    margin:auto 0 0 0;
+
+    .header-section{
+        border-radius: 6px;
+    }
+
+    .text-section{
+        display: none;
+        padding: 15px;
+
+        p{
+            margin-bottom:10px;
+            display: flex;
+            align-items: center;
+
+            .header{
+                margin-right: auto;
+            }
+            
+            .change{
+                margin-left: 5px;
+            }
+
+            &:last-child{
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &.active{
+         
+        .header-section{
+            border-radius: 0 0 6px 6px;
+        }
+      
+        .text-section{
+            display: block;
+        }
+    }
+}

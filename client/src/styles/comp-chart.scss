@@ -1,0 +1,43 @@
+@import "mixins/mixins.scss";
+
+.component.chart{
+    display: block;
+    height: calc(100% - 15px);
+    width: 100%;
+    padding: 0px;
+    
+    .chart-panel{
+        @include background();
+        position: relative;
+        display: block;
+        overflow: hidden;
+        height: 100%;
+        
+        .chart-label{
+            position: absolute;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    }
+
+    @include media-md {
+        width: calc((100% / 2) * 1);
+        padding: 20px;
+        height: 100%;
+        
+        .chart-panel{
+            border-radius: 6px;
+        }
+    }
+
+    @include media-lg {
+        width: calc((100% / 3) * 2);
+    }
+
+
+    @include media-xxl {
+        width: calc((100% / 4) * 3);
+    }
+}

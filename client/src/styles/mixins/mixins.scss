@@ -1,51 +1,97 @@
+
 @mixin text ($fontSize, $letterSpacing:0.5, $fontWeight:400) {
     font-size: $fontSize + unquote("px");
     letter-spacing: $letterSpacing + unquote("px");
     font-weight: $fontWeight;
 }
 
+@mixin red ($opacity:1) {
+    color: rgba(255,120,140,$opacity);
+}
+
+@mixin green ($opacity:1) {
+    color: rgba(80,250,110,$opacity);
+}
+
+@mixin white ($opacity:1) {
+    color: rgba(255,255,255,$opacity);
+}
+
+@mixin icon ($size:25){
+    font-size: $size + unquote("px");
+    width: $size + unquote("px");
+} 
+
+@mixin transition ($duration:0.2) {
+    transition-duration: $duration + unquote("s");
+}
+
+@mixin background ($opacity:0.1) {
+    background:rgba(200, 210, 230, $opacity);
+}
+
 @mixin h1 () {
-    font-size: 20px;
-    line-height: 30px;
-    letter-spacing: 3.5px;
+    font-size: 17px;
     font-weight:600;
-    text-transform: uppercase;
+    line-height: 20px;
+    letter-spacing: 3px;
+    margin: 0;
 }
 
 @mixin h2 () {
-    font-size: 20px;
-    line-height: 26px;
-    font-weight: 400;
-    letter-spacing: 2px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 3px;
+    margin: 0;
 }
 
 @mixin h3 () {
-    font-size: 16px;
-    line-height: 20px;
-    margin-bottom: 20px;
-    letter-spacing: 1.4px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 2px;
+    margin: 0;
 }
 
 @mixin h4 () {
-    font-size: 16px;
-    line-height: 26px;
+    font-size:14px;
+    font-weight: 600;
+    line-height: 18px;
+    letter-spacing: 2px;
+    margin: 0;
 }
 
 @mixin p () {
-    font-size: 14px;
-    line-height: 26px;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 18px;
+    letter-spacing: 1px;
+    margin: 0;
 }
 
-@mixin p-light () {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 100;
+@mixin media-xs {
+    @media (max-width: 576px) { @content; }
 }
 
-@mixin p-bold () {
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 600;
+@mixin media-sm {
+    @media (min-width: 576px) { @content; }
+}
+
+@mixin media-md {
+    @media (min-width: 768px) { @content; }
+}
+
+@mixin media-lg {
+    @media (min-width: 992px) { @content; }
+}
+
+@mixin media-xl {
+    @media (min-width: 1200px) { @content; }
+}
+
+@mixin media-xxl {
+    @media (min-width: 1400px) { @content; }
 }
 
 @mixin custom-scrollbar () {

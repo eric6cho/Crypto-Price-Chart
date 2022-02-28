@@ -1,88 +1,52 @@
-import { CrosshairMode } from 'lightweight-charts';
+import { CrosshairMode,LineStyle } from 'lightweight-charts';
 
-export const RSI = 'RSI';
-export const SMA = 'SMA';
-export const EMA = 'EMA';
-export const RVI = 'RVI';
-export const MACD = 'MACD';
-export const STOCH = 'Stoch';
-export const STOCHRSI = 'StochRSI';
-export const FEARANDGREED = 'Fear And Greed';
+const RSI = 'RSI';
+const MA = 'MA';
+const VOLATILITY = 'Volatility';
+const RVI = 'RVI';
+const MACD = 'MACD';
+const STOCH = 'Stoch';
+const STOCHRSI = 'StochRSI';
+const FEARANDGREED = 'Fear And Greed';
+const HEIKINASHI = 'Heikin Ashi';
+const PRICE = 'Price';
+const VOLUME = 'Volume';
 
-// grid background
-export const transparent = 'rgba(0,0,0,0)';
+const transparent = 'rgba(0,0,0,0)';
+const white = 'rgba(255, 255, 255, 1)';
+const greenBar = 'rgba(30,185,130,1)';
+const redBar = 'rgba(255,100,90,1)';
+const greenBar1 = 'rgba(40,185,140,0.35)';
+const redBar1 =  'rgba(255,110,100,0.35)';
 
-// white text
-export const white = 'rgba(255, 255, 255, 1)';
-
-// line colors
-export const purpleLine = 'rgba(180,90,255,0.5)';
-export const orangeLine = 'rgba(232, 141, 77, 0.7)';
-export const blueLine = 'rgba(80,135,255, 0.7)';
-export const whiteLine = 'rgba(255,255,255,0.7)';
-export const yellowLine = 'rgba(250, 250, 122, 0.7)';
-export const greenLine = 'rgba(4, 250, 122, 0.7)';
-export const redLine = 'rgba(255,100,90,0.7)';
-
-
-// bar colors
-export const blueBar = 'rgba(80,135,255,0.5)';
-export const orangeBar = 'rgba(232, 141, 77,0.5)';
-export const purpleBar = 'rgba(180,90,255,0.35)';
-export const greenBar = 'rgba(30,185,130,1)';
-export const redBar = 'rgba(255,100,90,1)';
-export const greenBar1 = 'rgba(30,185,130,0.7)';
-export const redBar1 =  'rgba(255,100,90,0.7)';
-export const greenBar2 = 'rgba(30,185,130,0.35)';
-export const redBar2 =  'rgba(255,100,90,0.35)';
-
-let signalColor = orangeLine;
-let indicatorColor = blueLine;
-let boundaryColor = purpleLine;
-let histogramColor = purpleBar;
-let sma50DayColor = blueLine;
-let sma200DayColor = greenLine;
-let sma350DayColor = redLine;
-
-let supportBandColor = yellowLine;
-
+const signalColor = 'rgba(200, 110, 50, 1)'; // orange line
+const indicatorColor = 'rgba(110, 155, 255, 1)'; // blue line
+const boundaryColor = 'rgba(180,90,255,0.35)'; // purple line
+const histogramColor = 'rgba(250,150,255,0.3)';; // purple bar
+const sma50DayColor = 'rgba(70, 120, 170, 0.7)'; // blue color
+const sma200DayColor = 'rgba(80, 170, 130, 0.7)'; // green line
+const sma350DayColor = 'rgba(255, 80, 70, 0.7)'; // red line
+const supportBandColor = 'rgba(170, 170, 80, 0.7)'; // yellow line
 
 
 // start config functions
 
-const topScaleMargins = {
-    top: 0.05,
-    bottom: 0.5,
-};
-
-const midScaleMargins = {
-    top: 0.55,
-    bottom: 0.25,
-};
-
-const bottomScaleMargins = {
-    top: 0.8,
-    bottom: 0.02,
-};
-
-const horizontalLineConfig = {
+const getHorizontalLineConfig = (margins,index='1',value =0) => ({
     color: boundaryColor,
+    price: value,
     lineWidth: 1,
-    priceLineVisible: false,
-    
+    axisLabelVisible:false,
+    priceScaleId: index,
+    scaleMargins: margins,
+    lineStyle: LineStyle.Solid,
+});
 
-    crosshairMarkerRadius: 1,
-    priceScaleId: '1',
-    priceFormat: {
-        type: 'price',
-    },
-    scaleMargins: midScaleMargins,
-};
 
 export const getupdatedConfig = (id) => ({ 
     width: document.getElementById(id).offsetWidth, 
     height: document.getElementById(id).offsetHeight,
 });
+
 
 export const getChartConfig = (id) => ({
     width: document.getElementById(id).innerWidth,
@@ -92,19 +56,11 @@ export const getChartConfig = (id) => ({
         textColor: white,
     },
     grid: {
-        vertLines: {
-            color: transparent,
-        },
-        horzLines: {
-            color: transparent,
-        },
+        vertLines: { color: transparent },
+        horzLines: { color: transparent },
     },
-    crosshair: {
-        mode: CrosshairMode.Normal,
-    },
-    priceScale: {
-        borderColor: transparent,
-    },
+    crosshair: { mode: CrosshairMode.Normal },
+    priceScale: { borderColor: transparent },
     timeScale: {
         borderColor: transparent,
         fixLeftEdge:true,
@@ -113,66 +69,31 @@ export const getChartConfig = (id) => ({
     },
 });
 
-export const getCandlestickConfig = (precision=2) => ({
-    upColor: greenBar1,
-    borderUpColor: greenBar1,
-    wickUpColor: greenBar1,
-    downColor: redBar1,
-    borderDownColor: redBar1,
-    wickDownColor: redBar1,
+
+export const getCandlestickConfig = (margins,index='0',precision=2) => ({
+    upColor: greenBar,
+    borderUpColor: greenBar,
+    wickUpColor: greenBar,
+    downColor: redBar,
+    borderDownColor: redBar,
+    wickDownColor: redBar,
     priceLineVisible: false,
-    priceScaleId: '0',
+    priceScaleId: index,
     priceFormat: {
-        type: 'price',
+        type: PRICE,
         precision: precision,
     },
-    
-    scaleMargins: topScaleMargins,
+    scaleMargins: margins,
 });
 
-export const getLineConfig = (color=white, thickness=1) => ({
+
+export const getSeriesConfig = ( margins,index='0',color=white, thickness=2, isVolume=false) => ({
     color: color,
     lineWidth: thickness,
     priceLineVisible: false,
-    
-    priceScaleId: '0',
-    scaleMargins: topScaleMargins,
-});
-
-export const getBottomLineConfig = (color=white, thickness=1) => ({
-    color: color,
-    lineWidth: thickness,
-    priceLineVisible: false,
-    priceScaleId: '1',
-    priceFormat: {
-        type: 'price',
-    },
-    scaleMargins: midScaleMargins,
-});
-
-
-export const getVolumeHistogramConfig = (color=blueBar) => ({
-    color: color,
-    priceLineVisible: false,
-    priceScaleId: '1',
-    priceFormat: {
-        type: 'volume',
-    },
-    scaleMargins: midScaleMargins,
-});
-
-export const getScoreHistogramConfig = (color=blueBar) => ({
-    color: color,
-    priceLineVisible: false,
-    priceScaleId: '2', 
-    priceFormat: {
-        type: 'price',
-    },
-    scaleMargins: bottomScaleMargins,
-    priceRange: {
-        minValue: -100,
-        maxValue: 100,
-    },
+    priceScaleId: index,
+    scaleMargins: margins,
+    priceFormat: { type: isVolume ? VOLUME : PRICE },
 });
 
 // end config functions
@@ -180,98 +101,37 @@ export const getScoreHistogramConfig = (color=blueBar) => ({
 
 // start data mapping functions
 
+export const getCandleStickData = (data,title,precision) => {
+    let parsedDates = Object.keys(data).filter(date => data[date][title]!==undefined);
 
-export const getScoreData = (data,indicator) => {
-
-    let parsedData = Object.keys(data).map(date => {
-        
-
-        let score = 100 - Math.floor(Math.random() * 200);
-        
-        if(data[date][indicator] !== undefined && data[date][indicator]['Total'] !== undefined)
-            score = data[date][indicator]['Total']['Final Adjusted Score'];
-        
-        return {
-            time:date,
-            value:score,
-            color:getScoreColor(score),
-        };
-      });
-
-    return reverseList(parsedData);
-};
-
-
-export const getVolatilityData = (data,type) => {
-    let parsedData = Object.keys(data).map(date => {
-        
-        let value = data[date]['Volatility'][type];
-
-        let color = value>=0 ? greenBar2 : redBar2;
-
-        return {
-            time:date,
-            value:value,
-            color:color,
-        };
-      });
-
-    return reverseList(parsedData);
-};
-
-export const getHorizontalLineData = (data,value) => {
-    let parsedData = Object.keys(data).map(date => {
+    let parsedData = parsedDates.map(date => {
+        let value = data[date][title];
         return {
             time : date,
-            value : value,
-        };
+            open : parseFloat(value['Open']),
+            high : parseFloat(value['High']),
+            low : parseFloat(value['Low']),
+            close : parseFloat(value['Close']),
+        }
     });
 
-    return reverseList(parsedData);
+    return parsedData.filter(d => d).reverse();
 };
 
-export const getCandleStickData = (data) => {
-    let parsedData = Object.keys(data).map(date => {
-    
-        //let priceData = data[date]['Indicators']['Price']['Daily'];
-        let priceData = data[date];
-       
+
+export const getData = (data, title, entry, isMultiColorHistogram=false) => {
+    let parsedDates = Object.keys(data).filter(date => data[date][title]!==undefined && data[date][title][entry]!==undefined);
+
+    let parsedData = parsedDates.map(date => {
+        let value = data[date][title];
         return {
             time : date,
-            open : parseFloat(priceData['Open']),
-            high : parseFloat(priceData['High']),
-            low : parseFloat(priceData['Low']),
-            close : parseFloat(priceData['Close']),
+            value : parseFloat(value[entry]),
+            color: isMultiColorHistogram? (value[entry]>=0 ? greenBar1 : redBar1) : histogramColor
         };
     });
-
-    return reverseList(parsedData);
-};
-
-export const getData = (data, period, type, entry) => {
     
-    //let parsedData = Object.keys(data).reverse().map(date => {
-      
-        let parsedData = Object.keys(data).map(date => {
-            let value = -1;
-            let indicators = data[date];
-            let title = period ? period+' Day '+type : type;
-
-            //console.log(date,title,indicators[title]);
-            if(indicators[title] !== undefined)
-                value = indicators[title][entry];
-            
-            return {
-                time : date,
-                value : parseFloat(value),
-            };
-        
-    
-    });
-
-    parsedData = parsedData.filter(d => d.value !== -1);
-    
-    return reverseList(parsedData);
+    return parsedData.filter(d => d).reverse();
 };
 
 // end data mapping functions
@@ -279,28 +139,10 @@ export const getData = (data, period, type, entry) => {
 
 // start other functions
 
-export const getScoreColor = (score) => {
-    if(score < 75 && score > -75) 
-        return score>0 ? greenBar2 : redBar2;
-    return score>0 ? greenBar : redBar;
-};
-
-export const chartNullCheck = (data,chart,chartId) => {
-    let chartDiv = document.getElementById(chartId);
-    return (chart || !chartDiv || !data || data==={} || Object.keys(data).length===0);
-};
-
 export const addResizeListener = (chart,id) => {
-    window.addEventListener(
-        "resize", 
-        () => chart.applyOptions(getupdatedConfig(id)), 
-        false
-    );
-
-    applyTimeScale(chart);
-};
-
-export const applyTimeScale = (chart) => {
+    window.addEventListener("resize",() => chart.applyOptions(getupdatedConfig(id)),false);
+    
+    // apply time scale
     let periodStart = new Date();
     periodStart.setMonth(periodStart.getMonth() - 5);
 
@@ -313,222 +155,258 @@ export const applyTimeScale = (chart) => {
     });
 };
 
-export const reverseList = list => {
-    let reversedList = [];
-    list.forEach(e => reversedList.unshift(e));
-    return reversedList;
-};
 
-// end other functions
-
-export const addDefaultGraphsToChart = (chart,data) => {
-    
-    // place price graph at the top of the chart
-    let priceCandleSeries = chart.addCandlestickSeries(getCandlestickConfig());
-    priceCandleSeries.setData(getCandleStickData(data));
-
-    // place scores at the bottom of the chart
-    let scoreSeries = chart.addHistogramSeries(getScoreHistogramConfig());        
-    scoreSeries.setData(getScoreData(data));
-
-    return priceCandleSeries;
-};
-
-// indicator functions
-
-export const addIndicatorSMA = (chart,data) => { 
-
-    let SMA50LineSeries = chart.addLineSeries(getLineConfig(sma50DayColor,1));
-    SMA50LineSeries.setData(getData(data, 50, SMA, SMA));
-
-    let SMA200LineSeries = chart.addLineSeries(getLineConfig(sma200DayColor,1));
-    SMA200LineSeries.setData(getData(data, 200, SMA, SMA));
-
-    let SMA350LineSeries = chart.addLineSeries(getLineConfig(sma350DayColor,1));
-    SMA350LineSeries.setData(getData(data, 350, SMA, SMA));
-
-    let SMA140LineSeries = chart.addLineSeries(getLineConfig(supportBandColor,1));
-    SMA140LineSeries.setData(getData(data, 140, SMA, SMA));
-    
-    let EMA147LineSeries = chart.addLineSeries(getLineConfig(supportBandColor,1));
-    EMA147LineSeries.setData(getData(data, 147, EMA, EMA));
-
-    let volumeSeries = chart.addHistogramSeries(getVolumeHistogramConfig(histogramColor));
-    volumeSeries.setData(getData(data,null,'Volume','Volume'));
-
-    /*
-    line series for 50 SMA
-    line series for 140 SMA
-    line series for 200 SMA
-    line series for 147 EMA
-    histogram series for Volume
-    */
-   
-    return {
-        '50 Day SMA' : SMA50LineSeries,
-        '140 Day SMA' : SMA140LineSeries,
-        '200 Day SMA' : SMA200LineSeries,
-        '350 Day SMA' : SMA350LineSeries,
-        '147 Day EMA' : EMA147LineSeries,
-        'Volume' : volumeSeries
-    };
-};
-
-export const addIndicatorRSI = (chart,data) => {
-
-    let boundaryValues = [20,30,50,70,80];
-    addBoundaryLines(chart,data,boundaryValues);
-
-    let RSILineSeries = chart.addLineSeries(getBottomLineConfig(indicatorColor,2));
-    RSILineSeries.setData(getData(data, 14, RSI, RSI));
-
-    /*
-    line series for RSI
-    */
-
-    return {
-        'RSI' : RSILineSeries
-    };
-};
-
-export const addIndicatorRVI = (chart,data) => {
-   
-    let boundaryValues = [0];
-    addBoundaryLines(chart,data,boundaryValues);
-
-    let signalLineSeries = chart.addLineSeries(getBottomLineConfig(signalColor,1));
-    signalLineSeries.setData(getData(data, 10, RVI, 'Signal'));
-
-    let RVILineSeries = chart.addLineSeries(getBottomLineConfig(indicatorColor,2));
-    RVILineSeries.setData(getData(data, 10, RVI, RVI));
-
-    /*
-    line series for RVI
-    line series for signal line
-    */
-    
-    return {
-        'RVI' : RVILineSeries,
-        'Signal' : signalLineSeries,
-    };
-};
-
-export const addIndicatorMACD = (chart,data) => {
-    let histogramSeries = chart.addHistogramSeries(getVolumeHistogramConfig(histogramColor));
-    histogramSeries.setData(getData(data,26,MACD,'Histogram'));
-
-    let signalLineSeries = chart.addLineSeries(getBottomLineConfig(signalColor,1));
-    signalLineSeries.setData(getData(data, 26, MACD, 'Signal'));
-
-    let MACDLineSeries = chart.addLineSeries(getBottomLineConfig(indicatorColor,2));
-    MACDLineSeries.setData(getData(data, 26, MACD, MACD));
-
-    /*
-    line series for MACD
-    line series for signal line
-    histogram series for MACD histogram
-    */
-
-    return {
-        'MACD' : MACDLineSeries,
-        'Signal' : signalLineSeries,
-        'Histogram' : histogramSeries
-    };
-};
-
-
-
-export const addIndicatorStoch = (chart,data) => {
-
-    let boundaryValues = [20,30,50,70,80];
-    addBoundaryLines(chart,data,boundaryValues);
-
-    let signalLineSeries = chart.addLineSeries(getBottomLineConfig(signalColor,1));
-    signalLineSeries.setData(getData(data, 5, STOCH, 'StochSlowD'));
-
-    let stochLineSeries = chart.addLineSeries(getBottomLineConfig(indicatorColor,2));
-    stochLineSeries.setData(getData(data, 5, STOCH, 'StochSlowK'));
-  
-    /*
-    line series for Stoch
-    line series for signal line
-    */
-
-    return {
-        'Stoch' : stochLineSeries,
-        'Signal' : signalLineSeries
-    };
-};
-
-export const addIndicatorStochRSI = (chart,data) => {
-    
-    let boundaryValues = [20,30,50,70,80];
-    addBoundaryLines(chart,data,boundaryValues);
-
-    let signalLineSeries = chart.addLineSeries(getBottomLineConfig(signalColor,1));
-    signalLineSeries.setData(getData(data, 14, STOCHRSI, 'stochRSISlowD'));
-
-    let stochRSILineSeries = chart.addLineSeries(getBottomLineConfig(indicatorColor,2));
-    stochRSILineSeries.setData(getData(data, 14, STOCHRSI, 'stochRSISlowK'));
- 
-    /*
-    line series for StochRSI
-    line series for signal line
-    */
-
-    return {
-        'StochRSI' : stochRSILineSeries,
-        'Signal' : signalLineSeries
-    };
-};
-
-export const addFearAndGreed = (chart,data) => { 
-    
-    let boundaryValues = [15,50,85];
-    addBoundaryLines(chart,data,boundaryValues);
-
-    let fearAndGreedLineSeries = chart.addLineSeries(getBottomLineConfig(indicatorColor,2));
-    fearAndGreedLineSeries.setData(getData(data, null, FEARANDGREED, 'Value'));
- 
-    /*
-    line series for Fear And Greed
-    */
-
-    return {
-        'Fear And Greed' : fearAndGreedLineSeries,
-    };
-};
-
-
-export const addVolatility = (chart,data) => {
-
-    let boundaryValues = [-20,-12,0,12,20];
-    addBoundaryLines(chart,data,boundaryValues);
-
-    let volatilityHistogramSeries = chart.addHistogramSeries(getBottomLineConfig(orangeBar,1));
-    volatilityHistogramSeries.setData(getVolatilityData(data, 'High Low'));
-
-    
-    let signalLineSeries = chart.addLineSeries(getBottomLineConfig(indicatorColor,2));
-    signalLineSeries.setData(getVolatilityData(data, 'Signal'));
-
-    /*
-    histogram series for high low volatility
-    line series for signal line 
-    */
-
-    return {
-        'High Low' : volatilityHistogramSeries,
-        'Signal' : signalLineSeries,
-    };
-};
-
-
-export const addBoundaryLines = (chart,data,values) => {
-    values.map(value => {
-        let boundaryLineSeries = chart.addLineSeries(horizontalLineConfig);
-        boundaryLineSeries.setData(getHorizontalLineData(data, value));
+const getPrecision = data =>{
+    let decimalPoints = Object.keys(data).map(date => {
+        let closeStr = data[date]['Price']['Close'].toString();
+        let decimalIndex = closeStr.indexOf('.');
+        let decimalLength = decimalIndex === -1 ? 2 : closeStr.substring(decimalIndex+1).length;
+        return decimalLength;
     });
+
+    return Math.max.apply(Math, decimalPoints);
 };
 
 
+const getTopMargin = (indicatorLength) => {
+    let bottomSpacing = 0.2;
+    if(indicatorLength >2) bottomSpacing = 0.4;
+    if(indicatorLength >4) bottomSpacing = 0.5;
+    if(indicatorLength >7) bottomSpacing = 0.7;
+    
+    return {
+        topSpace:0,
+        top: 0.01,
+        bottom: bottomSpacing,
+    };
+};
+
+
+const getScaleMarginsFull = (indicators,index) => {
+    let length  = indicators.length;
+    let margins = getTopMargin(length);
+  
+    if(index===0 ) return margins;
+  
+    let topSpacing = 0.04;
+    let remainingSpace = margins['bottom'];
+    let indicatorSpace = remainingSpace / (length-1);
+
+    let top = (1 - remainingSpace) + (indicatorSpace * (index - 1)) + topSpacing;
+
+    return {
+        topSpace : top - topSpacing,
+        top: top,
+        bottom: remainingSpace - (indicatorSpace * (index )),
+    };
+};
+
+
+export const addIndicators = (chart,fullData,selectedIndicators) => {
+
+
+    const getPriceSeries = (margins,index) => {   
+        let SMA350LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,sma350DayColor,2));
+        SMA350LineSeries.setData(getData(data, MA, '350 Day SMA'));
+    
+        let SMA200LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,sma200DayColor,2));
+        SMA200LineSeries.setData(getData(data, MA, '200 Day SMA'));
+        
+        let SMA140LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,supportBandColor,2));
+        SMA140LineSeries.setData(getData(data, MA, '140 Day SMA'));
+        
+        let EMA147LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,supportBandColor,2));
+        EMA147LineSeries.setData(getData(data, MA, '147 Day EMA'));
+        
+        let SMA50LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,sma50DayColor,2));
+        SMA50LineSeries.setData(getData(data, MA, '50 Day SMA'));
+    
+        let candleSeries = chart.addCandlestickSeries(getCandlestickConfig(margins,index));
+        candleSeries.setData(getCandleStickData(data,PRICE,getPrecision(data)));
+        
+        seriesObject['Series']['Price 50 Day SMA'] = SMA50LineSeries;
+        seriesObject['Series']['Price 140 Day SMA'] = SMA140LineSeries;
+        seriesObject['Series']['Price 200 Day SMA'] = SMA200LineSeries;
+        seriesObject['Series']['Price 350 Day SMA'] = SMA350LineSeries;
+        seriesObject['Series']['Price 147 Day EMA'] = EMA147LineSeries;
+        seriesObject['Series']['Price Candles'] = candleSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+
+
+    const getHeikinAshiSeries = (margins,index) => {
+        let SMA350LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,sma350DayColor,2));
+        SMA350LineSeries.setData(getData(data, MA, '350 Day SMA'));
+    
+        let SMA200LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,sma200DayColor,2));
+        SMA200LineSeries.setData(getData(data, MA, '200 Day SMA'));
+        
+        let SMA140LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,supportBandColor,2));
+        SMA140LineSeries.setData(getData(data, MA, '140 Day SMA'));
+        
+        let EMA147LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,supportBandColor,2));
+        EMA147LineSeries.setData(getData(data, MA, '147 Day EMA'));
+        
+        let SMA50LineSeries = chart.addLineSeries(getSeriesConfig(margins,index,sma50DayColor,2));
+        SMA50LineSeries.setData(getData(data, MA, '50 Day SMA'));
+    
+        let candleSeries = chart.addCandlestickSeries(getCandlestickConfig(margins,index));
+        candleSeries.setData(getCandleStickData(data,HEIKINASHI,getPrecision(data)));
+        
+        seriesObject['Series']['Heikin Ashi 50 Day SMA'] = SMA50LineSeries;
+        seriesObject['Series']['Heikin Ashi 140 Day SMA'] = SMA140LineSeries;
+        seriesObject['Series']['Heikin Ashi 200 Day SMA'] = SMA200LineSeries;
+        seriesObject['Series']['Heikin Ashi 350 Day SMA'] = SMA350LineSeries;
+        seriesObject['Series']['Heikin Ashi 147 Day EMA'] = EMA147LineSeries;
+        seriesObject['Series']['Heikin Ashi Candles'] = candleSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+
+
+    const getVolumeSeries = (margins,index) => {
+        let volumeSeries = chart.addHistogramSeries(getSeriesConfig(margins,index,histogramColor,1,true));
+        volumeSeries.setData(getData(data,'Volume','Value'));
+        
+        seriesObject['Series']['Volume'] = volumeSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+
+
+    const getVolatilitySeries = (margins,index) => {
+        let volatilityHistogramSeries = chart.addHistogramSeries(getSeriesConfig(margins,index,histogramColor,1,true));
+        volatilityHistogramSeries.setData(getData(data,VOLATILITY,'High Low',true));
+
+        let signalLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,indicatorColor,2));
+        signalLineSeries.setData(getData(data,VOLATILITY,'Signal'));
+
+        let boundaryValues = [-20,-12,0,12,20];
+        addBoundaryLines(signalLineSeries,boundaryValues,margins,index);
+
+        seriesObject['Series']['Volatility High Low'] = volatilityHistogramSeries;
+        seriesObject['Series']['Volatility Signal'] = signalLineSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+ 
+
+    const getRSISeries = (margins,index) => {
+        let RSILineSeries = chart.addLineSeries(getSeriesConfig(margins,index,indicatorColor,2));
+        RSILineSeries.setData(getData(data, '14 Day RSI', RSI));
+
+        let boundaryValues = [20,30,50,70,80];
+        addBoundaryLines(RSILineSeries,boundaryValues,margins,index);
+
+        seriesObject['Series']['RSI Value'] = RSILineSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+
+   
+    const getStochSeries = (margins,index) => {
+        let signalLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,signalColor,2));
+        signalLineSeries.setData(getData(data, '5 Day Stoch', 'StochSlowD'));
+
+        let stochLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,indicatorColor,2));
+        stochLineSeries.setData(getData(data, '5 Day Stoch', 'StochSlowK'));
+    
+        let boundaryValues = [20,30,50,70,80];
+        addBoundaryLines(stochLineSeries,boundaryValues,margins,index);
+        
+        seriesObject['Series']['Stoch Value'] = stochLineSeries;
+        seriesObject['Series']['Stoch Signal'] = signalLineSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+   
+
+    const getStochRSISeries = (margins,index) => {
+        let signalLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,signalColor,2));
+        signalLineSeries.setData(getData(data, '14 Day StochRSI', 'StochRSISlowD'));
+
+        let stochRSILineSeries = chart.addLineSeries(getSeriesConfig(margins,index,indicatorColor,2));
+        stochRSILineSeries.setData(getData(data, '14 Day StochRSI', 'StochRSISlowK'));
+
+        let boundaryValues = [20,30,50,70,80];
+        addBoundaryLines(stochRSILineSeries,boundaryValues,margins,index);
+
+        seriesObject['Series']['StochRSI Value'] = stochRSILineSeries;
+        seriesObject['Series']['StochRSI Signal'] = signalLineSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+    
+
+    const getMACDSeries = (margins,index) => {
+        let histogramSeries = chart.addHistogramSeries(getSeriesConfig(margins,index,histogramColor));
+        histogramSeries.setData(getData(data,'26 Day MACD','Histogram',true));
+    
+        let signalLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,signalColor,2));
+        signalLineSeries.setData(getData(data, '26 Day MACD', 'Signal'));
+    
+        let MACDLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,indicatorColor,2));
+        MACDLineSeries.setData(getData(data, '26 Day MACD', MACD));
+    
+        seriesObject['Series']['MACD Value'] = MACDLineSeries;
+        seriesObject['Series']['MACD Signal'] = signalLineSeries;
+        seriesObject['Series']['MACD Histogram'] = histogramSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+    
+
+    const getRVISeries = (margins,index) => {
+        let signalLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,signalColor,2));
+        signalLineSeries.setData(getData(data, '10 Day RVI', 'Signal'));
+    
+        let RVILineSeries = chart.addLineSeries(getSeriesConfig(margins,index,indicatorColor,2));
+        RVILineSeries.setData(getData(data, '10 Day RVI', RVI));
+    
+        let boundaryValues = [0];
+        addBoundaryLines(RVILineSeries,boundaryValues,margins,index);
+      
+        seriesObject['Series']['RVI Value'] = RVILineSeries;
+        seriesObject['Series']['RVI Signal'] = signalLineSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+    
+
+    const getFearAndGreedSeries = (margins,index) => {
+        let fearAndGreedLineSeries = chart.addLineSeries(getSeriesConfig(margins,index,indicatorColor,2));
+        fearAndGreedLineSeries.setData(getData(data, 'Fear and Greed', 'Value'));
+    
+        let boundaryValues = [15,50,85];
+        addBoundaryLines(fearAndGreedLineSeries,boundaryValues,margins,index);
+    
+        seriesObject['Series']['Fear And Greed Value'] = fearAndGreedLineSeries;
+        seriesObject['Margins'][index] = margins;
+    };
+
+
+    const getSeries = (indicator,margins,index) => {
+        if(indicator===PRICE) getPriceSeries(margins,index);
+        else if(indicator===HEIKINASHI) getHeikinAshiSeries(margins,index);
+        else if(indicator===VOLUME) getVolumeSeries(margins,index);
+        else if(indicator===VOLATILITY) getVolatilitySeries(margins,index);
+        else if(indicator===RSI) getRSISeries(margins,index);
+        else if(indicator===STOCH) getStochSeries(margins,index);
+        else if(indicator===STOCHRSI) getStochRSISeries(margins,index);
+        else if(indicator===MACD) getMACDSeries(margins,index);
+        else if(indicator===RVI) getRVISeries(margins,index);
+        else if(indicator===FEARANDGREED) getFearAndGreedSeries(margins,index);
+    };
+
+
+    let data = fullData['data'];
+    let margins = {top:0.02,bottom:0.5};
+    let seriesObject = {};
+    seriesObject['Series'] = {};
+    seriesObject['Margins'] = {};
+
+    selectedIndicators.forEach((indicator,index) => {
+        margins = getScaleMarginsFull(selectedIndicators,index);
+        getSeries(indicator, margins,index); // change for iteration
+    });
+
+    addResizeListener(chart,"chart");
+ 
+    return seriesObject;
+};
+
+
+export const addBoundaryLines = (series,values,margins,index) => 
+    values.map(value => series.createPriceLine(getHorizontalLineConfig(margins,index,value)));

@@ -1,0 +1,23 @@
+@import "mixins/mixins.scss";
+
+&.entry-asset{
+
+    .entry-header-section{
+    
+        .rank{
+            width: 30px;
+        }
+
+        .symbol{
+            margin-right: auto;
+        }
+
+        .price{
+            margin-right: 75px;
+
+            span{
+                margin-left: 10px;
+            }
+        }
+    }
+}
