@@ -1,6 +1,4 @@
-# Crypto-Risk-Dashboard
-
-CRYPTO RISK DASHBOARD
+# Crypto Risk Dashboard
 
 Deployed project: 
 https://crypto-risk-dashboard.herokuapp.com/
