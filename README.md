@@ -1,7 +1,7 @@
-# Crypto Risk Dashboard  
+# Crypto Price Chart  
   
 Deployed project:  
-https://crypto-risk-dashboard.herokuapp.com/
+https://crypto-price-chart.herokuapp.com/
   
 Project Description:  
 A project using React and Node.js that gathers live and historical data for hundreds 
