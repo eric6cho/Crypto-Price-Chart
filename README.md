@@ -1,24 +1,30 @@
-# Crypto Price Chart  
+# Crypto Price Chart
+
+A personal use, full stack data visualization project that gathers data of cryptocurrency assets and the cryptocurrency market as a whole. Displays live price changes, historical prices, and technical indicators for over 200 cryptocurrencies using interactive charts made with the TradingView Library.
   
-Deployed project:  
-https://crypto-price-chart.herokuapp.com/
-  
-Project Description:  
-A project using React and Node.js that gathers live and historical data for hundreds 
-of cryptocurrencies and compiles several widely used technical indicators to help 
-determine the overall risk of the price of a cryptocurrency at a given point in time.  
-  
-Running the project locally:  
-After cloning the repository, the steps below will help you run the project.   
-All steps are in reference to the folder to which the repo was cloned to.  
-  
-To start the node.js server on port 3001:  
-- npm start  
-  
-To start the react development server on port 3000:  
-- cd client  
-- npm start  
-  
-Upcoming features:  
-- Add buy/sell statuses to each technical indicator when it gives strong signals for buying or selling.  
-- Add an overall risk indicator with an overall buy/sell signal to compile the results of multiple technical indicators.  
+## Deployed Application
+
+This application is deployed and hosted on Heroku and can be viewed at 
+[crypto-price-chart.herokuapp.com](https://crypto-price-chart.herokuapp.com/).
+
+## Available Scripts
+
+All scripts below are run from the project directory.
+
+### Run the Node.js server
+
+`npm start`
+
+This will start the Node.js server on port 3001.
+
+### Run the React client app
+
+`cd client`
+
+`npm start`
+
+This will start the React client app on port 3000 on [localhost:3000](http://localhost:3000).
+
+## Deploying The Project
+
+The deployed project is based on the `main` branch, and a new deployment occurs when updates are pushed onto the `main` branch.
