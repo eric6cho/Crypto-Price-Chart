@@ -4,8 +4,8 @@ A personal use, full stack data visualization project that gathers data of crypt
   
 ## Deployed Application
 
-This application is deployed and hosted on Heroku and can be viewed at 
-[crypto-price-chart.herokuapp.com](https://crypto-price-chart.herokuapp.com/).
+This application is deployed and hosted on Heroku and can be viewed 
+[here](https://crypto-price-chart.herokuapp.com/).
 
 ## Available Scripts
 
@@ -23,7 +23,7 @@ This will start the Node.js server on port 3001.
 
 `npm start`
 
-This will start the React client app on port 3000 on [localhost:3000](http://localhost:3000).
+This will start the React client app on port 3000.
 
 ## Deploying The Project
 
